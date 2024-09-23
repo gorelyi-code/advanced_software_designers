@@ -2,68 +2,56 @@
 
 ## Summary
 
-An application continuity service dynamically backs up and restores the state of applications running within the framework on K8s. The service shall use the DSL of the framework to determine the relevant application state and its backup policies. Developers of an application should be able to backup and restore a specific version from images and relevant state from the service. The application state shall be stored externally on the given S3-compatible object storage.
+The system is designed to automate the collection and analysis of data on the publication activity of teachers and their participation in conferences, as well as on the scientific events of departments. It tracks publication activity, calculates metrics that are not available in HSE systems, and analyzes publication texts. Based on this analysis, the system can generate additional metrics, which contributes to a more comprehensive assessment of scientific activity.
 
 ## Stakeholders
 
-* Developers
-* DevOps
-* Engineers
-* Information Security
-* Product managers
-* Investors
+* Administration of the FCS and HSE
+* Employees of the FCS
+* Scientific departments of the FCS
+* Students and applicants of the FCS
+* Computer Science scientists and researchers from all over the world
 
 ## Project Specification
 
 ### Features
 
-* Dynamic creation of backups and restoration of state
-  * Service shall be able to backup the state of applications running within the framework on K8s
-  * Service shall be able to restore the state of applications backed up by service
-  * Users shall be able to select custom backup policies
+* Parsing HSE sites
+  * The system can parse embedded HSE sites to gather the necessary information
+  * The system can perform parsing at intervals to update the data
 
-* Usage of DSL framework
-  * The service shall use the DSL framework to determine the relevant application state and its backup policies and take automatic actions
+* Pubilcation text analysis
+  * The system can analyze the text of publications to build metrics on the text
 
-* Possibility of creating backups when the developer desires to
-  *  Developers shall be able to backup their applications
-  *  Developers shall be able to restore a specific version of their applications from images and relevant state
+* Automatic classification of publications (*hard to realize)
+  * Automatic classification of publications by topic using natural language processing, which will allow analyzing the research directions of the department.
 
-* External storage of state backups
-  * The application state shall be stored externally on the given S3-compatible object storage
+* Displaying key metrics
+  * The system displays key metrics and indicators such as publication frequency, quantity, periodicity, etc
 
-* UI and API control over backups
-  *  The system should notify the user about the time it will take to create and restore a backup
-  *  Users have to be able to view the history of backups
-  *  Integration with other DevOps tools
+* Comparative Analysis
+  * A function for comparing metrics from different units or faculty members to see differences on various metrics.
+
+* Admin panel
+  * Ability to manage system resources using a user-friendly interface
+
+* Public web page
+  * A public resource for interacting with the system
  
 ### Constraints
 
-* Performance Limitations
-  * The system should take into account limitations related to backup creation and restore time, possible system load parameters and network limitations
-  * The backup recovery time should not exceed the backup creation time
-
-* Limitations on the amount of data
-  * The storage capacity of the system must be constantly monitored so that there is no overflow of the storage
-
-* Accessibility
-  * The system should have a high level of availability (e.g. 99,9%) and be able to continue operating or gracefully complete current operations in the event of failures
-
-* Compatibility
-  * Different versions of k8s may have their own peculiarities of operation, which can cause problems with backup and restore states. Supporting different versions requires additional testing and updating efforts
-
-* Security
-  * The system must ensure data protection at all stages (extraction, transformation, loading), including authentification, authorization, data encryption and access auditing
-  * The data has to stay in consistent state
+* Data limitations
+  * Data sources may vary widely, requiring more complex data parsing
+  * Large amount of data that would require a large data warehouse
 
 * Maintainability
   * The system should be easy to maintain and update. Updates and patches should be deployable without significant downtime or the need for a complete system restart
 
-* Usability
-  * The system interface should be intuitive for users with different technical backgrounds
+* Access to the system
+  * It is necessary to provide a proper system for differentiating access rights so that data does not get to unauthorized users.
 
-* Boot up time
-  * System is able to turn on quickly after a reboot or shutdown
+* User-friendly user interface
+  * A user-friendly interface is important for end users and from the experience of using the system
 
 ## Team name: ASDs
 
