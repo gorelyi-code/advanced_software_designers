@@ -1,7 +1,7 @@
 #Main use case diagram
 
 The main use case script displays the main way of interacting with the system. There are 3 actors in the diagram:
-* Unauthorised user - future user
+* Unauthorized user - future user
 * User - the main actor that interacts with the system
 * Administrator - the actor who configures the system and adds users.
 
