@@ -12,4 +12,4 @@ Most of the interactions with the system are performed by the user. He has the f
 * Restore application version
 
 
-![Изображение](uml_diagrams/img/main/use-case-ASDs.png)
+![image](hometasks/task_6/img/main_use_case.png)
