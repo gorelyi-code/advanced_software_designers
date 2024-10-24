@@ -15,4 +15,4 @@ Most of the interactions with the system are performed by the authorized user. H
 *  Login: login and password authorization in the system
 *  CreateAccount: сreate a new account in the system to use its functionality
 
-![image](hometasks/task_6/img/main_use_case.jpg)
+![image](use_case_diagram.png)
