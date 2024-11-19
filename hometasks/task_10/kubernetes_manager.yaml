@@ -14,9 +14,6 @@ externalDocs:
 tags:
   - name: Kubernetes Manager
     description: Managing kubernetes
-    externalDocs:
-      description: Find out more
-      url: http://swagger.io
 paths:
   /kubernetes_manager/change_backup_policies:
     put:
