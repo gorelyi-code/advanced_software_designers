@@ -15,7 +15,21 @@ tags:
   - name: Kubernetes Manager
     description: Managing kubernetes
 paths:
-  /kubernetes_manager/change_backup_policies:
+  /kubernetes/checkKubernetesStatus:
+    get:
+      tags:
+        - Kubernetes Manager
+      summary: Check state of kubernetes
+      description: Check whether kubernetes is alive and functioning as expected
+      operationId: checkStatus
+      responses:
+        '200':
+          description: Kubernetes is alive and works as expected
+        '404':
+          description: Kubernetes not configured
+        '505':
+          description: Kubernetes is dead or is not working as expected
+  /kubernetes/changeBackupPolicies:
     put:
       tags:
         - Kubernetes Manager
@@ -37,7 +51,7 @@ paths:
                 $ref: '#/components/schemas/BackupPolicy'
         '422':
           description: Validation exception
-  /kubernetes_manager/set_kubernetes_settings:
+  /kubernetes/setKubernetesSettings:
     put:
       tags:
         - Kubernetes Manager
@@ -59,20 +73,6 @@ paths:
                 $ref: '#/components/schemas/KubernetesSettings'
         '422':
           description: Validation exception
-  /kubernetes_manager/check_kubernetes_status:
-    get:
-      tags:
-        - Kubernetes Manager
-      summary: Check state of kubernetes
-      description: Check whether kubernetes is alive and functioning as expected
-      operationId: checkStatus
-      responses:
-        '200':
-          description: Kubernetes is alive and works as expected
-        '404':
-          description: Kubernetes not configured
-        '505':
-          description: Kubernetes is dead or is not working as expected
 components:
   schemas:
     BackupPolicy:
