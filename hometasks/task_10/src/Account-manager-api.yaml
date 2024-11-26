@@ -36,19 +36,6 @@ paths:
       summary: Logs user into the system
       description: ''
       operationId: loginUser
-      parameters:
-        - name: username
-          in: query
-          description: The user name for login
-          required: false
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: The password for login in clear text
-          required: false
-          schema:
-            type: string
       requestBody:
         description: Login post params
         content:
@@ -58,24 +45,6 @@ paths:
       responses:
         '200':
           description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              schema:
-                type: string
-                format: date-time
-          content:
-            application/xml:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
         '400':
           description: Invalid username/password supplied
           
@@ -91,11 +60,11 @@ paths:
         default:
           description: successful operation
           
-  /user/createNewAccaunt:
+  /user/createNewAccount:
     post:
       tags:
         - user_manager
-      summary: create new accaunt
+      summary: create new account
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters: []
@@ -115,16 +84,16 @@ paths:
         - user_manager
       summary: Change user role
       description: This can only be done by the logged in user.
-      operationId: updateUser
+      operationId: changeUserRole
       parameters:
         - name: username
-          in: path
+          in: query
           description: name that need to be deleted
           required: true
           schema:
             type: string
         - name: role
-          in: path
+          in: query
           description: name that need to be deleted
           required: true
           schema:
@@ -134,16 +103,16 @@ paths:
         default:
           description: successful operation
           
-  /user/deleteAccaunt:
+  /user/deleteAccount:
     delete:
       tags:
         - user_manager
       summary: Delete user password
       description: This can only be done by the logged in user.
-      operationId: updateUser
+      operationId: deletAccount
       parameters:
         - name: username
-          in: path
+          in: query
           description: name that need to be deleted
           required: true
           schema:
@@ -159,10 +128,10 @@ paths:
         - user_manager
       summary: Recovery user password
       description: This can only be done by the logged in user.
-      operationId: updateUser
+      operationId: recoveryPassword
       parameters:
         - name: username
-          in: path
+          in: query
           description: name that need to be deleted
           required: true
           schema:
@@ -177,7 +146,7 @@ paths:
         - user_manager
       summary: Change user password
       description: This can only be done by the logged in user.
-      operationId: updateUser
+      operationId: changePassword
       requestBody:
         description: Update an existent user in the store
         content:
@@ -192,72 +161,6 @@ paths:
 
 components:
   schemas:
-    Order:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 10
-        petId:
-          type: integer
-          format: int64
-          example: 198772
-        quantity:
-          type: integer
-          format: int32
-          example: 7
-        shipDate:
-          type: string
-          format: date-time
-        status:
-          type: string
-          description: Order Status
-          example: approved
-          enum:
-            - placed
-            - approved
-            - delivered
-        complete:
-          type: boolean
-      xml:
-        name: order
-    Customer:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 100000
-        username:
-          type: string
-          example: fehguy
-        address:
-          type: array
-          xml:
-            name: addresses
-            wrapped: true
-          items:
-            $ref: '#/components/schemas/Address'
-      xml:
-        name: customer
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-          example: 437 Lytton
-        city:
-          type: string
-          example: Palo Alto
-        state:
-          type: string
-          example: CA
-        zip:
-          type: string
-          example: '94301'
-      xml:
-        name: address
     Category:
       type: object
       properties:
@@ -365,18 +268,6 @@ components:
             - sold
       xml:
         name: pet
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
-      xml:
-        name: '##default'
   requestBodies:
     Pet:
       description: Pet object that needs to be added to the store
@@ -395,16 +286,3 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/User'
-  securitySchemes:
-    petstore_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
-          scopes:
-            write:pets: modify pets in your account
-            read:pets: read your pets
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
